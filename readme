@@ -1,0 +1,64 @@
+# Terraform AWS Infrastructure Deployment
+This repository contains Terraform configuration files to deploy infrastructure on AWS.
+
+## Prerequisites
+
+*********************************
+Ensure you have the following installed:
+
+- Terraform: [Installation Guide](https://learn.hashicorp.com/tutorials/terraform/install-cli)
+- AWS CLI: [Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- Git: [Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+*********************************
+
+*********************************
+Make sure you have AWS access and secret keys with appropriate permissions.
+*********************************
+
+## Steps to Deploy
+*********************************
+1. Clone this repository:
+
+bash
+git clone <repository-url>
+cd <repository-directory>
+*********************************
+
+*********************************
+Set up your AWS credentials:
+export AWS_ACCESS_KEY_ID=<your-access-key>
+export AWS_SECRET_ACCESS_KEY=<your-secret-key>
+export AWS_DEFAULT_REGION=<your-preferred-region>
+*********************************
+
+
+*********************************
+Alternatively, you can use AWS CLI to configure credentials:
+aws configure
+*********************************
+
+
+*********************************
+Initialize Terraform
+terraform init
+*********************************
+
+*********************************
+Plan the Terraform execution:
+		terraform plan
+If the plan looks good, apply the Terraform configuration:
+		terraform apply
+You will be prompted to confirm the execution. Type yes and press Enter.
+Once the deployment is complete, Terraform will display the output variables including the DNS name of the Application Load Balancer (ALB).
+*********************************
+
+*********************************
+git add .
+git commit -m "Add Terraform configuration for AWS infrastructure deployment"
+git push origin main
+*********************************
+
+*********************************
+After finishing using the infrastructure, can be made down to avoid incurring unnecessary costs. Use below command:
+terraform destroy 
+*********************************
