@@ -1,0 +1,132 @@
+Your Interactive Learning Environment Bash Terminal
+
+controlplane $ ls
+go
+controlplane $ 
+controlplane $ 
+controlplane $ vi nginx-deployment.yaml
+controlplane $ ls
+go  nginx-deployment.yaml
+controlplane $ kubectl apply -f nginx-deployment.yaml
+deployment.apps/nginx-deployment created
+controlplane $ 
+controlplane $ kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   1/1     1            1           10s
+controlplane $ 
+controlplane $ 
+controlplane $ kubectl expose deployment nginx-deployment --type=NodePort --port=80
+service/nginx-deployment exposed
+controlplane $ 
+controlplane $ 
+controlplane $ kubectl get svc
+NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes         ClusterIP   10.96.0.1        <none>        443/TCP        5h27m
+nginx-deployment   NodePort    10.100.189.223   <none>        80:31908/TCP   23s
+controlplane $ 
+controlplane $ 
+controlplane $ kubectl get svc nginx-deployment
+NAME               TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+nginx-deployment   NodePort   10.100.189.223   <none>        80:31908/TCP   44s
+controlplane $ 
+controlplane $ 
+controlplane $ 
+controlplane $ sudo ufw allow 31908
+Rules updated
+Rules updated (v6)
+controlplane $ kubectl expose deployment nginx-deployment --type=NodePort --port=80
+Error from server (AlreadyExists): services "nginx-deployment" already exists
+controlplane $ 
+controlplane $ 
+controlplane $ 
+controlplane $ mkdir nginx-chart
+controlplane $ ls
+go  nginx-chart  nginx-deployment.yaml
+controlplane $ 
+controlplane $ 
+controlplane $ cd nginx-chart
+controlplane $ pwd
+/root/nginx-chart
+controlplane $ 
+controlplane $ 
+controlplane $ mkdir charts templates
+controlplane $ 
+controlplane $ 
+controlplane $ ll
+total 16
+drwxr-xr-x 4 root root 4096 Apr  7 15:11 ./
+drwx------ 8 root root 4096 Apr  7 15:11 ../
+drwxr-xr-x 2 root root 4096 Apr  7 15:11 charts/
+drwxr-xr-x 2 root root 4096 Apr  7 15:11 templates/
+controlplane $ 
+controlplane $ 
+controlplane $ touch values.yaml Chart.yaml
+controlplane $ 
+controlplane $ 
+controlplane $ 
+controlplane $ ll
+total 16
+drwxr-xr-x 4 root root 4096 Apr  7 15:11 ./
+drwx------ 8 root root 4096 Apr  7 15:11 ../
+drwxr-xr-x 2 root root 4096 Apr  7 15:11 charts/
+-rw-r--r-- 1 root root    0 Apr  7 15:11 Chart.yaml
+drwxr-xr-x 2 root root 4096 Apr  7 15:11 templates/
+-rw-r--r-- 1 root root    0 Apr  7 15:11 values.yaml
+controlplane $ 
+controlplane $ 
+controlplane $ pwd
+/root/nginx-chart
+controlplane $ cd ..
+controlplane $ ll
+total 52
+drwx------  8 root root 4096 Apr  7 15:11 ./
+drwxr-xr-x 25 root root 4096 Nov 10  2020 ../
+-rw-r--r--  1 root root 3231 Nov 16  2020 .bashrc
+drwx------  2 root root 4096 Apr  7 09:28 .cache/
+drwx------  3 root root 4096 Apr  7 09:28 .gnupg/
+drwxr-xr-x  4 root root 4096 Nov 16  2020 go/
+-rw-r--r--  1 root root    0 Nov 16  2020 .hushlogin
+drwxr-xr-x  4 root root 4096 Apr  7 09:28 .kube/
+drwxr-xr-x  4 root root 4096 Apr  7 15:11 nginx-chart/
+-rw-r--r--  1 root root  317 Apr  7 14:54 nginx-deployment.yaml
+-rw-r--r--  1 root root  148 Aug 17  2015 .profile
+drwxr-xr-x  2 root root 4096 Nov 16  2020 .ssh/
+-rw-------  1 root root  884 Apr  7 14:54 .viminfo
+-rw-r--r--  1 root root  123 Nov 10  2020 .vimrc
+controlplane $ mv nginx-deployment.yaml /root/nginx-chart/templates/
+controlplane $ cd nginx-chart/
+controlplane $ ll
+total 16
+drwxr-xr-x 4 root root 4096 Apr  7 15:11 ./
+drwx------ 8 root root 4096 Apr  7 15:12 ../
+drwxr-xr-x 2 root root 4096 Apr  7 15:11 charts/
+-rw-r--r-- 1 root root    0 Apr  7 15:11 Chart.yaml
+drwxr-xr-x 2 root root 4096 Apr  7 15:12 templates/
+-rw-r--r-- 1 root root    0 Apr  7 15:11 values.yaml
+controlplane $ vi Chart.yaml 
+controlplane $ cat Chart.yaml 
+apiVersion: v2
+name: nginx-chart
+description: A Helm chart for deploying Nginx
+version: 0.1.0
+
+controlplane $ 
+controlplane $ 
+controlplane $ helm package .
+Successfully packaged chart and saved it to: /root/nginx-chart/nginx-chart-0.1.0.tgz
+controlplane $ 
+controlplane $ 
+controlplane $ 
+controlplane $ 
+controlplane $ ll
+total 24
+drwxr-xr-x 4 root root 4096 Apr  7 15:13 ./
+drwx------ 8 root root 4096 Apr  7 15:13 ../
+drwxr-xr-x 2 root root 4096 Apr  7 15:11 charts/
+-rw-r--r-- 1 root root   95 Apr  7 15:13 Chart.yaml
+-rw-r--r-- 1 root root  422 Apr  7 15:13 nginx-chart-0.1.0.tgz
+drwxr-xr-x 2 root root 4096 Apr  7 15:12 templates/
+-rw-r--r-- 1 root root    0 Apr  7 15:11 values.yaml
+controlplane $ 
+controlplane $ 
+controlplane $ 
